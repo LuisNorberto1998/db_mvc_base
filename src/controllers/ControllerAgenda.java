@@ -58,18 +58,20 @@ public class ControllerAgenda {
      * Método que llama al método conectarBD del modelo y muestra el nombre y
      * email del primer registro en las cajas de texto de ViewAgenda.
      */
-    public void initDB(){
+    public void initDB() {
         modelAgenda.conectarDB();
         viewAgenda.jtf_id.setText(String.valueOf(modelAgenda.getId().toString()));
         viewAgenda.jtf_nombre.setText(modelAgenda.getNombre());
         viewAgenda.jtf_email.setText(modelAgenda.getEmail());
     }
+
     /**
      * Metodo para inicializar la ViewAgenda
      */
     public void initComponents() {
+        viewAgenda.setTitle("Actividad 12 - Base de datos MVC v 0.1");
+        viewAgenda.setResizable(false);
         viewAgenda.setLocationRelativeTo(null);
-        viewAgenda.setTitle("Agenda MVC");
         viewAgenda.setVisible(true);
     }
 
@@ -88,6 +90,10 @@ public class ControllerAgenda {
      */
     private void jbtn_primero_actionPerformed() {
         System.out.println("Action del boton jbtn_primero");
+        modelAgenda.moverPrimerRegistro();
+        viewAgenda.jtf_id.setText(modelAgenda.getId().toString());
+        viewAgenda.jtf_email.setText(modelAgenda.getEmail());
+        viewAgenda.jtf_nombre.setText(modelAgenda.getNombre());
         //invocar al metodo moverPrimerRegistro
         //mostrar nombre en la vista
         //mostar email en la vista
@@ -98,6 +104,10 @@ public class ControllerAgenda {
      */
     private void jbtn_anterior_actionPerformed() {
         System.out.println("Action del boton jbtn_anterior");
+        modelAgenda.moverAnteriorRegistro();
+        viewAgenda.jtf_id.setText(modelAgenda.getId().toString());
+        viewAgenda.jtf_email.setText(modelAgenda.getEmail());
+        viewAgenda.jtf_nombre.setText(modelAgenda.getNombre());
         //invocar al metodo moverAnteriorRegistro
         //mostrar nombre en la vista
         //mostar email en la vista
@@ -108,6 +118,10 @@ public class ControllerAgenda {
      */
     private void jbtn_ultimo_actionPerformed() {
         System.out.println("Action del boton jbtn_ultimo");
+        modelAgenda.moverUltimoRegistro();
+        viewAgenda.jtf_id.setText(modelAgenda.getId().toString());
+        viewAgenda.jtf_email.setText(modelAgenda.getEmail());
+        viewAgenda.jtf_nombre.setText(modelAgenda.getNombre());
         //invocar al metodo moverUltimoRegistro
         //mostrar nombre en la vista
         //mostar email en la vista
@@ -118,6 +132,10 @@ public class ControllerAgenda {
      */
     private void jbtn_siguiente_actionPerformed() {
         System.out.println("Action del boton jbtn_siguiente");
+        modelAgenda.moverSiguienteRegistro();
+        viewAgenda.jtf_id.setText(modelAgenda.getId().toString());
+        viewAgenda.jtf_email.setText(modelAgenda.getEmail());
+        viewAgenda.jtf_nombre.setText(modelAgenda.getNombre());
         //invocar al metodo moverSiguienteRegistro
         //mostrar nombre en la vista
         //mostar email en la vista

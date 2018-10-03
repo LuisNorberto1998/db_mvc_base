@@ -26,6 +26,30 @@ public class ModelAgenda {
     private String nombre;
     private String email;
 
+    public Connection getConexion() {
+        return conexion;
+    }
+
+    public void setConexion(Connection conexion) {
+        this.conexion = conexion;
+    }
+
+    public Statement getSt() {
+        return st;
+    }
+
+    public void setSt(Statement st) {
+        this.st = st;
+    }
+
+    public ResultSet getRs() {
+        return rs;
+    }
+
+    public void setRs(ResultSet rs) {
+        this.rs = rs;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -50,6 +74,16 @@ public class ModelAgenda {
         this.email = email;
     }
 
+    public void cambiarDatos() {
+        try {
+            this.setId(rs.getInt("id_contacto"));
+            this.setNombre(rs.getString("nombre"));
+            this.setEmail(rs.getString("email"));
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 001: \n" + e.getMessage());
+        }
+    }
+
     /**
      * Método que realiza las siguietnes acciones: 1.- Conecta con la base
      * agenda_mvc. 2.- Consulta todo los registros de la tabla contactos. 3.-
@@ -58,15 +92,19 @@ public class ModelAgenda {
      */
     public void conectarDB() {
         try {
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda_mvc", "user_mvc", "pass_mvc.2018");
+            conexion = (com.mysql.jdbc.Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/agenda_mvc", "user_mvc", "pass_mvc.2018");
             st = conexion.createStatement();
             rs = st.executeQuery("SELECT * FROM contactos;");
             rs.next();
             id = rs.getInt("id_contacto");
             nombre = rs.getString("nombre");
             email = rs.getString("email");
-        } catch (SQLException err) {
-            JOptionPane.showMessageDialog(null, "Error ModelAgenda 001: " + err.getMessage());
+
+            this.setId(id);
+            this.setEmail(email);
+            this.setNombre(nombre);
+        } catch (SQLException sql) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 002: " + sql.getMessage());
         }
 
     }
@@ -78,6 +116,12 @@ public class ModelAgenda {
      */
     public void moverPrimerRegistro() {
         System.out.print("Programa accion moverPrimerRegistro");
+        try {
+            rs.first();
+            cambiarDatos();
+        } catch (SQLException sql) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 004: " + sql.getMessage());
+        }
     }
 
     /**
@@ -87,7 +131,17 @@ public class ModelAgenda {
      * email
      */
     public void moverSiguienteRegistro() {
-        System.out.print("Programa accion moverSiguienteRegistro");
+
+        try {
+            if (!rs.isLast()) {
+                rs.next();
+                cambiarDatos();
+                System.out.print("Programa accion moverSiguienteRegistro");
+            }
+
+        } catch (SQLException sql) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 005: " + sql.getMessage());
+        }
     }
 
     /**
@@ -97,7 +151,18 @@ public class ModelAgenda {
      * email
      */
     public void moverAnteriorRegistro() {
-        System.out.print("Programa accion moverAnteriorRegistro");
+
+        try {
+            if (!rs.isFirst()) {
+                rs.previous();
+                cambiarDatos();
+                System.out.print("Programa accion moverAnteriorRegistro");
+
+            }
+
+        } catch (SQLException sql) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 006: " + sql.getMessage());
+        }
     }
 
     /**
@@ -107,6 +172,12 @@ public class ModelAgenda {
      */
     public void moverUltimoRegistro() {
         System.out.print("Programa accion moverUltimoRegistro");
+        try {
+            rs.last();
+            cambiarDatos();
+        } catch (SQLException sql) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 007: " + sql.getMessage());
+        }
     }
 
 }

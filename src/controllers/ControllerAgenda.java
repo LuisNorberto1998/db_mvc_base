@@ -60,6 +60,7 @@ public class ControllerAgenda {
      */
     public void initDB(){
         modelAgenda.conectarDB();
+        viewAgenda.jtf_id.setText(String.valueOf(modelAgenda.getId().toString()));
         viewAgenda.jtf_nombre.setText(modelAgenda.getNombre());
         viewAgenda.jtf_email.setText(modelAgenda.getEmail());
     }

@@ -190,17 +190,17 @@ public class ModelAgenda {
         }
     }
 
-    public void nuevoRegistro() {
+    public void nuevoRegistro(String email, String nombre) {
         System.out.println("Insertar nuevo contacto");
         try {
-            ps.executeUpdate("INSERT INTO contactos(nombre, email) VALUES " + "('" + nombre + "','" + email + "');");
+            st.executeUpdate("INSERT INTO contactos(nombre, email) VALUES " + "('" + nombre + "','" + email + "');");
             this.conectarDB();
         } catch (SQLException sql) {
             JOptionPane.showMessageDialog(null, "Error ModelAgenda 008: " + sql.getMessage());
         }
     }
 
-    public void cambiarRegistro() {
+    public void cambiarRegistro(String email, String nombre) {
         System.out.println("Modificar contacto");
         try {
             st.executeUpdate("UPDATE contactos SET nombre= '" + nombre + "',email='" + email + "' WHERE id_contacto='" + id + "';");
@@ -210,7 +210,7 @@ public class ModelAgenda {
         }
     }
 
-    public void borrarRegistro() {
+    public void borrarRegistro(Integer id) {
         System.out.println("Eliminar contacto");
         try {
             st.executeUpdate("DELETE FROM contactos WHERE id = '" + id + "';");

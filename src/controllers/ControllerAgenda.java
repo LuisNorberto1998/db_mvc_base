@@ -8,6 +8,7 @@ package controllers;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import models.ModelAgenda;
 import views.ViewAgenda;
 
@@ -172,11 +173,25 @@ public class ControllerAgenda {
             viewAgenda.jbtn_anterior.setEnabled(false);
             viewAgenda.jbtn_ultimo.setEnabled(false);
 
+            viewAgenda.jtf_id.setText("");
+            viewAgenda.jtf_nombre.setText("");
+            viewAgenda.jtf_email.setText("");
+
         }
 
     }
 
     private void jbtn_insertarR_actionPerformed() {
+        System.out.println("Accion de boton insertar registro");
+
+        modelAgenda.setNombre(viewAgenda.jtf_nombre.getText());
+        modelAgenda.setEmail(viewAgenda.jtf_email.getText());
+        modelAgenda.nuevoRegistro(modelAgenda.getEmail(), modelAgenda.getNombre());
+
+        viewAgenda.jtf_id.setText("");
+        viewAgenda.jtf_nombre.setText("");
+        viewAgenda.jtf_email.setText("");
+
         viewAgenda.jbtn_insertar.setEnabled(false);
         viewAgenda.jbtn_modificar.setEnabled(true);
         viewAgenda.jbtn_eliminar.setEnabled(true);
@@ -188,6 +203,7 @@ public class ControllerAgenda {
             viewAgenda.jbtn_anterior.setEnabled(true);
             viewAgenda.jbtn_ultimo.setEnabled(true);
         }
+        JOptionPane.showMessageDialog(null, "El regisro fue guardado correctamente");
     }
 
     /**
@@ -195,6 +211,8 @@ public class ControllerAgenda {
      */
     private void jbtn_cambiarR_actionPerformed() {
         System.out.println("Accion de boton modificar registro");
+        modelAgenda.cambiarRegistro(viewAgenda.jtf_email.getText(), viewAgenda.jtf_nombre.getText());
+        JOptionPane.showMessageDialog(null, "El registro fue modificado correctamente");
     }
 
     /**

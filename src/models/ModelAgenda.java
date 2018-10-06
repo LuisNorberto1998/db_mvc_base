@@ -7,6 +7,7 @@ package models;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,6 +22,7 @@ public class ModelAgenda {
     private Connection conexion;
     private Statement st;
     private ResultSet rs;
+    private PreparedStatement ps;
 
     private Integer id;
     private String nombre;
@@ -72,6 +74,14 @@ public class ModelAgenda {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public PreparedStatement getPs() {
+        return ps;
+    }
+
+    public void setPs(PreparedStatement ps) {
+        this.ps = ps;
     }
 
     public void cambiarDatos() {
@@ -177,6 +187,36 @@ public class ModelAgenda {
             cambiarDatos();
         } catch (SQLException sql) {
             JOptionPane.showMessageDialog(null, "Error ModelAgenda 007: " + sql.getMessage());
+        }
+    }
+
+    public void nuevoRegistro() {
+        System.out.println("Insertar nuevo contacto");
+        try {
+            ps.executeUpdate("INSERT INTO contactos(nombre, email) VALUES " + "('" + nombre + "','" + email + "');");
+            this.conectarDB();
+        } catch (SQLException sql) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 008: " + sql.getMessage());
+        }
+    }
+
+    public void cambiarRegistro() {
+        System.out.println("Modificar contacto");
+        try {
+            st.executeUpdate("UPDATE contactos SET nombre= '" + nombre + "',email='" + email + "' WHERE id_contacto='" + id + "';");
+            this.conectarDB();
+        } catch (SQLException sql) {
+            JOptionPane.showMessageDialog(null, "Error ModelAgenda 009: " + sql.getMessage());
+        }
+    }
+
+    public void borrarRegistro() {
+        System.out.println("Eliminar contacto");
+        try {
+            st.executeUpdate("DELETE FROM contactos WHERE id = '" + id + "';");
+            this.conectarDB();
+        } catch (SQLException sql) {
+             JOptionPane.showMessageDialog(null, "Error ModelAgenda 009: " + sql.getMessage());
         }
     }
 

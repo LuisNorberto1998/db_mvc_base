@@ -140,4 +140,25 @@ public class ControllerAgenda {
         //mostrar nombre en la vista
         //mostar email en la vista
     }
+
+    /**
+     * Método para ver insertar nuevo registro en la tabla de contactos
+     */
+    private void jbtn_nuevoR_actionPerformed() {
+        System.out.println("Accion de boton insertar nuevo registro");
+    }
+
+    /**
+     * Método para modificar un registro en la tabla de contactos
+     */
+    private void jbtn_cambiarR_actionPerformed() {
+        System.out.println("Accion de boton modificar registro");
+    }
+
+    /**
+     * Método para eliminar registro en la tabla de contactos
+     */
+    private void jbtn_eliminarR_actionPerformed() {
+        System.out.println("Accion de boton eliminar registro");
+    }
 }

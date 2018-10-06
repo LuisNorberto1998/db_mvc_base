@@ -181,6 +181,9 @@ public class ControllerAgenda {
 
     }
 
+     /**
+     * Método para guardar nuevo registro en la tabla de contactos
+     */
     private void jbtn_insertarR_actionPerformed() {
         System.out.println("Accion de boton insertar registro");
 
@@ -220,5 +223,8 @@ public class ControllerAgenda {
      */
     private void jbtn_eliminarR_actionPerformed() {
         System.out.println("Accion de boton eliminar registro");
+        modelAgenda.borrarRegistro(Integer.parseInt(viewAgenda.jtf_id.getText()));
+        jbtn_primero_actionPerformed();
+        JOptionPane.showMessageDialog(null, "El registro se borro correctamente");
     }
 }

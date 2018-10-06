@@ -213,10 +213,10 @@ public class ModelAgenda {
     public void borrarRegistro(Integer id) {
         System.out.println("Eliminar contacto");
         try {
-            st.executeUpdate("DELETE FROM contactos WHERE id = '" + id + "';");
+            st.executeUpdate("DELETE FROM contactos WHERE id_contacto = '" + id + "';");
             this.conectarDB();
         } catch (SQLException sql) {
-             JOptionPane.showMessageDialog(null, "Error ModelAgenda 009: " + sql.getMessage());
+             JOptionPane.showMessageDialog(null, "Error ModelAgenda 010: " + sql.getMessage());
         }
     }
 

@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import models.ModelAgenda;
@@ -34,6 +35,14 @@ public class ControllerAgenda {
                 jbtn_siguiente_actionPerformed();
             } else if (e.getSource() == viewAgenda.jbtn_ultimo) {
                 jbtn_ultimo_actionPerformed();
+            } else if (e.getSource() == viewAgenda.jbtn_nuevo) {
+                jbtn_nuevoR_actionPerformed();
+            } else if (e.getSource() == viewAgenda.jbtn_insertar) {
+                jbtn_insertarR_actionPerformed();
+            } else if (e.getSource() == viewAgenda.jbtn_modificar) {
+                jbtn_cambiarR_actionPerformed();
+            } else if (e.getSource() == viewAgenda.jbtn_eliminar) {
+                jbtn_eliminarR_actionPerformed();
             }
 
         }
@@ -73,6 +82,8 @@ public class ControllerAgenda {
         viewAgenda.setResizable(false);
         viewAgenda.setLocationRelativeTo(null);
         viewAgenda.setVisible(true);
+        viewAgenda.jbtn_insertar.setEnabled(false);
+        viewAgenda.jtf_id.setEnabled(false);
     }
 
     /**
@@ -83,6 +94,10 @@ public class ControllerAgenda {
         viewAgenda.jbtn_anterior.addActionListener(actionListener);
         viewAgenda.jbtn_siguiente.addActionListener(actionListener);
         viewAgenda.jbtn_ultimo.addActionListener(actionListener);
+        viewAgenda.jbtn_nuevo.addActionListener(actionListener);
+        viewAgenda.jbtn_insertar.addActionListener(actionListener);
+        viewAgenda.jbtn_modificar.addActionListener(actionListener);
+        viewAgenda.jbtn_eliminar.addActionListener(actionListener);
     }
 
     /**
@@ -145,7 +160,34 @@ public class ControllerAgenda {
      * Método para ver insertar nuevo registro en la tabla de contactos
      */
     private void jbtn_nuevoR_actionPerformed() {
-        System.out.println("Accion de boton insertar nuevo registro");
+        System.out.println("Accion de boton nuevo registro");
+        viewAgenda.jbtn_insertar.setEnabled(true);
+        viewAgenda.jbtn_modificar.setEnabled(false);
+        viewAgenda.jbtn_eliminar.setEnabled(false);
+        viewAgenda.jbtn_nuevo.setEnabled(false);
+
+        for (Component component : viewAgenda.jPanelComponents.getComponents()) {
+            viewAgenda.jbtn_primero.setEnabled(false);
+            viewAgenda.jbtn_siguiente.setEnabled(false);
+            viewAgenda.jbtn_anterior.setEnabled(false);
+            viewAgenda.jbtn_ultimo.setEnabled(false);
+
+        }
+
+    }
+
+    private void jbtn_insertarR_actionPerformed() {
+        viewAgenda.jbtn_insertar.setEnabled(false);
+        viewAgenda.jbtn_modificar.setEnabled(true);
+        viewAgenda.jbtn_eliminar.setEnabled(true);
+        viewAgenda.jbtn_nuevo.setEnabled(true);
+
+        for (Component component : viewAgenda.jPanelComponents.getComponents()) {
+            viewAgenda.jbtn_primero.setEnabled(true);
+            viewAgenda.jbtn_siguiente.setEnabled(true);
+            viewAgenda.jbtn_anterior.setEnabled(true);
+            viewAgenda.jbtn_ultimo.setEnabled(true);
+        }
     }
 
     /**
